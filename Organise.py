@@ -9,6 +9,10 @@ class Organise():
     Started: 14.04.24
     Updated: 13.12.24
     
+        Updated Program Details
+        - developers: Ammar, Rori
+        - updated 01.01.25
+        
     Paste and run this script in the folder that you want to organise
     
     """
@@ -26,6 +30,7 @@ class Organise():
     _ALL_FILES:list
     _CHILD_DIRS:list
     _FILE__FILE_EXTENSIONS:dict
+    _ALL_FILE_SIZES:list
     
     def __init__(self): 
         self._CURRENT_DIR = os.getcwd()
@@ -56,6 +61,7 @@ class Organise():
             "archives": [".zip", ".rar", ".tar", ".7z"], 
             "other": [".iso", ".img"]
         }
+        self._ALL_FILE_SIZES = []
         
         self._check_child_dirs()
         self._backup_files()
@@ -152,6 +158,67 @@ class Organise():
             for file_extension in self._FILE_EXTENSIONS["other"]:
                 self._move_file(file, file_extension, dir_other)
     # ----------------------------------------    
+    def storage_list(self) -> None:
+        file_storage = []
+        
+        for files in self._CURRENT_DIR:
+            file_storage.append(files)
+
+    def sort_by_file_size(self) -> None:
+        # retrieving the paths to child directories
+        dir_text = f"{self._CURRENT_DIR}/text"
+        dir_docs = f"{self._CURRENT_DIR}/documents"
+        dir_images = f"{self._CURRENT_DIR}/images"
+        dir_music = f"{self._CURRENT_DIR}/music"
+        dir_videos = f"{self._CURRENT_DIR}/videos"
+        dir_programs = f"{self._CURRENT_DIR}/programs"
+        dir_shortcuts = f"{self._CURRENT_DIR}/shortcuts"
+        dir_archives = f"{self._CURRENT_DIR}/archives"
+        dir_other = f"{self._CURRENT_DIR}/other"
+
+        try:
+            #Trying to retrieve the size of each file type
+            file in self._ALL_FILES: # type: ignore
+            for file in self._CURRENT_DIR:
+                for file_extension in self._FILE_EXTENSIONS["text"]:
+                    os.path.getsize(dir_text)
+                    self.storage_list()
+
+                for file_extension in self._FILE_EXTENSIONS["documents"]:
+                    os.path.getsize(dir_docs)
+                    self.storage_list()
+    
+                for file_extension in self._FILE_EXTENSIONS["images"]:
+                    os.path.getsize(dir_images)
+                    self.storage_list()
+
+                for file_extension in self._FILE_EXTENSIONS["music"]:
+                    os.path.getsize(dir_music)
+                    self.storage_list()
+                    
+                for file_extension in self._FILE_EXTENSIONS["videos"]:
+                    os.path.getsize(dir_videos)
+                    self.storage_list()
+                    
+                for file_extension in self._FILE_EXTENSIONS["programs"]:
+                    os.path.getsize(dir_programs)
+                    self.storage_list()
+                        
+                for file_extension in self._FILE_EXTENSIONS["shortcuts"]:
+                    os.path.getsize(dir_shortcuts)
+                    self.storage_list()
+                        
+                for file_extension in self._FILE_EXTENSIONS["archives"]:
+                    os.path.getsize(dir_archives)
+                    self.storage_list()
+
+                for file_extension in self._FILE_EXTENSIONS["other"]:
+                    os.path.getsize(dir_other)
+                    self.storage_list()
+            # ----------------------------------------
+        except Exception as err:
+            print("Unable to sort file according to its size")
+
 
 # ==================================================
 
