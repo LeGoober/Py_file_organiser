@@ -158,14 +158,17 @@ class Organise():
             for file_extension in self._FILE_EXTENSIONS["other"]:
                 self._move_file(file, file_extension, dir_other)
     # ----------------------------------------    
+    def add_to_file_storage(self) -> None:
+        for file in self._ALL_FILES:
+            file_path = os.path.join(self._CURRENT_DIR, file)
+            file_size = os.path.getsize(file_path)
+            file_tuple = (file, file_size)
+            self._ALL_FILE_SIZES.append(file_tuple)
+
     def sort_by_file_size(self) -> None:
         try:
             #Trying to retrieve the size of each file type
-            for file in self._ALL_FILES: # type: ignore
-                file_path = os.path.join(self._CURRENT_DIR, file)
-                file_size = os.path.getsize(file_path)
-                self._ALL_FILE_SIZES.append((file, file_size))
-                self._ALL_FILE_SIZES.sort(key=lambda x:x[1])
+            self.add_to_file_storage()
             # ----------------------------------------
         except Exception as err:
             print("Unable to sort file according to its size")
